@@ -55,6 +55,31 @@ class LinkedList:
             current = current.next
         print("Finished")
 
+    # remove prev Node
+    def delete_node_and_prev(self, node_value):
+        current_node = self.head
+        prev_node = None
+
+        # Handle the case where the node to be deleted is the head
+        if current_node is not None and current_node.data == node_value:
+            self.head = current_node.next
+            return
+
+        while current_node is not None and current_node.data != node_value:
+            prev_node = current_node
+            current_node = current_node.next
+
+        if current_node is not None:
+            if prev_node is not None:
+                # Delete both the current_node and its previous node
+                prev_node.next = current_node.next
+            else:
+                # If current_node is the first node, delete the first node
+                self.head = current_node.next
+        else:
+            print(f"Node with value '{node_value}' not found.")
+
+
 
 # Node = data,next
 LL = LinkedList()
@@ -62,4 +87,8 @@ LL.insertAtbegin("Hello")
 LL.insertAtbegin("ABU")
 LL.insertAtIndex("THALIB", 1)
 LL.insertAtEnd("END")
+LL.display()
+LL.delete_node_and_prev(jhu"THALIB")
+
+print("\nAfter deletion:")
 LL.display()
